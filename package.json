@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "bottledup",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Welcome to our bottle selling website",
   "engines": {
     "node": ">= 7.0.0"
   },
