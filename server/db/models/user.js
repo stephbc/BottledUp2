@@ -66,7 +66,7 @@ const User = db.define('user', {
   hooks: {
     beforeValidate: function(user) {
       if (!user.firstName || !user.lastName || !user.email || !user.password || !user.address) {
-        window.alert('All Fields Are Required!')
+        Window.alert('All Fields Are Required!')
       }
     }
   }
