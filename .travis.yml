@@ -15,14 +15,16 @@ install:
 before_script:
   - psql -c 'create database "bottledup";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
+  - npm test # test the code
   - npm run build-client # make the bundle
-
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: graceshopperbottledup
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: IQHg68rebMfgJN4VnhTToajSXpH/Bl7aHyrSW4QFE8wUbeJphMHekKwl+ObqclTYjedOz0NsEjHjWqKHKOeqaxGKGfB2+ue0EUMQsE3quzC+Zbv0srDeykcPJrjheFXNEKg7W1Nr3yHL+qKaWFG/DIVGKUH0vx2DW8zywUD2n3bT+4OX9/8bLmbdgP/bCfm5rGLNcZBs7r9pPkFRhZUsg94y9xYKsBm8e2QZR0bYjJg0nn0HvX7vvlPYg0xsDRxw8hBI6PSR3/zXuEUKpqJx29AvwLB1VkkKgOjf3brpIQ5sZMnUN0i51KLS1HRecVzEDVX58nV2LhyDbQavv3yBlzvgqS4mQOd3bJK7htT1+KrO6ZZ6L1sUfQguo6RkT6jurLY/QnJZkqq4hQJURxEM7XwQzyBX2Afbm9qOEBECA2jCL7udEWUDIcifh7JN7oGGJrET15SM3++sU/l08ikDY1RnML/sCtyrftskGa51CReLKXNaBD8J4GbddY4OfUndkCBD6nj3IBtLCkeEsIHWngMZ3AWg8hgtsboeCE3fK/oVjShemRuRbXLrxK3u3PVDfqsxXv4ikgB8kvm+n3F9r5aTseXIFSq1B8Dc6InDLtq5Ua6KMByX23dibPzOJ34w6D450IU2DW6TXfLEJd4x8Sj15k5sGnAemmtn2jKiUSA=
