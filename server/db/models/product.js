@@ -32,6 +32,9 @@ const Product = db.define('product', {
   imgUrl: {
     type: Sequelize.STRING,
     defaultValue: 'public/favicon.ico'
+  },
+  description: {
+    type: Sequelize.TEXT
   }
 })
 
