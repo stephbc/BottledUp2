@@ -62,14 +62,6 @@ const User = db.define('user', {
       isIn: [['Guest', 'User', 'Admin']]
     }
   }
-}, {
-  hooks: {
-    beforeValidate: function(user) {
-      if (!user.firstName || !user.lastName || !user.email || !user.password || !user.address) {
-        Window.alert('All Fields Are Required!')
-      }
-    }
-  }
 })
 
 module.exports = User
