@@ -1,0 +1,57 @@
+import Axios from 'axios'
+import {act} from 'react-test-renderer'
+
+const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+
+const getAllProducts = products => {
+  return {
+    type: GET_ALL_PRODUCTS,
+    products
+  }
+}
+const getSingleProduct = product => {
+  return {
+    type: GET_SINGLE_PRODUCT,
+    product
+  }
+}
+
+export const fetchAllProducts = () => {
+  return async dispatch => {
+    try {
+      const {data} = await Axios.get('/api/products')
+      dispatch(getAllProducts(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+export const fetchOneProduct = id => {
+  return async dispatch => {
+    try {
+      const {data} = await Axios.get(`/api/products/${id}`)
+      dispatch(getSingleProduct(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+const initialState = {
+  products: [],
+  product: {}
+}
+
+function productsReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_ALL_PRODUCTS:
+      return {...state, products: action.products}
+    case GET_SINGLE_PRODUCT:
+      return {...state, product: action.product}
+    default:
+      return state
+  }
+}
+
+export default productsReducer
