@@ -5,7 +5,7 @@ const SingleProduct = props => {
   const {product} = props
   return (
     <div className="product">
-      <img id="productpic" src={product.imageUrl} />
+      <img id="productPic" src={product.imageUrl} />
       <h2>
         <Link to={`/products/${product.id}`}>{product.name}</Link>
       </h2>
@@ -18,4 +18,4 @@ const SingleProduct = props => {
     </div>
   )
 }
-module.exports = SingleProduct
+export default SingleProduct
