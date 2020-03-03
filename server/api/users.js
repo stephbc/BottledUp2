@@ -3,7 +3,7 @@ const {User} = require('../db/models')
 module.exports = router
 
 const checkIfAdmin = (req, res, next) => {
-  if (req.user.accountType !== 'Admin') {
+  if (req.user === undefined || req.user.accountType !== 'Admin') {
     const error = new Error('illegal action')
     error.status = 401
     return next(error)
@@ -20,6 +20,50 @@ router.get('/', checkIfAdmin, async (req, res, next) => {
       attributes: ['id', 'email']
     })
     res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const thisUser = await User.findByPk(req.params.id)
+    if (thisUser && req.user.email === thisUser.email) res.json(thisUser)
+    else res.sendStatus(401)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/', checkIfAdmin, async (req, res, next) => {
+  try {
+    const newUser = await User.create(req.body)
+    if (newUser) res.json(User.findAll())
+    else res.sendStatus(500)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id', checkIfAdmin, async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const thisUser = await User.findByPk(req.params.id)
+    if (thisUser && req.user.email === thisUser.email) {
+      await thisUser.update(req.body)
+      res.json(thisUser)
+    } else res.sendStatus(401)
   } catch (err) {
     next(err)
   }
