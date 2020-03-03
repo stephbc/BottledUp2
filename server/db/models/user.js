@@ -19,7 +19,6 @@ const User = db.define('user', {
   },
   email: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false,
     validate: {
       isEmail: true
@@ -60,14 +59,6 @@ const User = db.define('user', {
     defaultValue: 'Guest',
     validate: {
       isIn: [['Guest', 'User', 'Admin']]
-    }
-  }
-}, {
-  hooks: {
-    beforeValidate: function(user) {
-      if (!user.firstName || !user.lastName || !user.email || !user.password || !user.address) {
-        Window.alert('All Fields Are Required!')
-      }
     }
   }
 })
