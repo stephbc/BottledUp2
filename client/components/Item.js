@@ -20,7 +20,8 @@ class Item extends React.Component {
         <p>
           {product.material} {product.type} <br />
           Color: {product.color} <br />
-          {product.decription}
+          <br />
+          {product.description}
         </p>
       </div>
     )
