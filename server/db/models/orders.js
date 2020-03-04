@@ -11,17 +11,11 @@ const Orders = db.define('orders', {
   },
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    defaultValue: 0
   },
   totalCost: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    defaultValue: 0
   },
   complete: {
     type: Sequelize.BOOLEAN,
