@@ -15,7 +15,7 @@ const Product = db.define(
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        isIn: [['bottles', 'lids', 'straws']]
+        isIn: [['bottle', 'lid', 'straw']]
       }
     },
     material: {
@@ -23,14 +23,8 @@ const Product = db.define(
       allowNull: false
     },
     price: {
-      type: Sequelize.DECIMAL,
-      allowNull: false,
-      validate: {
-        min: 0
-      }
-    },
-    inventory: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       validate: {
         min: 0
       }
