@@ -9,9 +9,12 @@ class Item extends React.Component {
 
   render() {
     const {product} = this.props
+    let directory = product.type
+    console.log(directory)
     return (
       <div className="product">
-        <img id="productpic" src={product.imageUrl} />
+        <img id="productpic" src={`${product.imgUrl}`} />
+        {/* /public/products/${directory}/ */}
         <li>Price: {product.price}</li>
         <li>Type: {product.type}</li>
         <li>Made of: {product.material}</li>
@@ -24,7 +27,7 @@ class Item extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.products
+  product: state.products.product
 })
 
 const mapDispatchToProps = dispatch => ({
