@@ -3,8 +3,7 @@ const {Product} = require('../db/models')
 module.exports = router
 
 const checkIfAdmin = (req, res, next) => {
-  // console.log(req.user)
-  if (req.user.accountType !== 'Admin') {
+  if (req.user === undefined || req.user.accountType !== 'Admin') {
     const error = new Error('illegal action')
     error.status = 401
     return next(error)
