@@ -13,14 +13,15 @@ class Item extends React.Component {
     console.log(directory)
     return (
       <div className="product">
-        <img id="productpic" src={`${product.imgUrl}`} />
+        <img id="productpic" src={`${product.imgUrl}`} height="500" />
         {/* /public/products/${directory}/ */}
-        <li>Price: {product.price}</li>
-        <li>Type: {product.type}</li>
-        <li>Made of: {product.material}</li>
-        <li>Color: {product.color}</li>
-        <li>About: {product.decription}</li>
-        <li>Availability: {product.inventory}</li>
+        <h2>{product.name}</h2>
+        <h3>{`$${product.price / 100}`}</h3>
+        <p>
+          {product.material} {product.type} <br />
+          Color: {product.color} <br />
+          {product.decription}
+        </p>
       </div>
     )
   }
