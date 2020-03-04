@@ -12,13 +12,11 @@
 //   })
 
 //   describe('/api/users/', () => {
+//     const codysEmail = 'cody@puppybook.com'
+
 //     beforeEach(() => {
 //       return User.create({
-//         firstName: 'Cody',
-//         lastName: 'ThePuppy',
-//         email: 'cody@puppybook.com',
-//         password: 'bones',
-//         address: 'DogWorld'
+//         email: codysEmail
 //       })
 //     })
 
@@ -28,7 +26,7 @@
 //         .expect(200)
 
 //       expect(res.body).to.be.an('array')
-//       expect(res.body[0].email).to.be.equal('cody@puppybook.com')
+//       expect(res.body[0].email).to.be.equal(codysEmail)
 //     })
 //   }) // end describe('/api/users')
 // }) // end describe('User routes')
