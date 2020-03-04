@@ -17,6 +17,7 @@ class Item extends React.Component {
         {/* /public/products/${directory}/ */}
         <h2>{product.name}</h2>
         <h3>{`$${product.price / 100}`}</h3>
+        <button type="button">ADD TO CART</button>
         <p>
           {product.material} {product.type} <br />
           Color: {product.color} <br />
