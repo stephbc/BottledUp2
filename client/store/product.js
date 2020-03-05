@@ -2,6 +2,9 @@ import Axios from 'axios'
 
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const CLEAR_SINGLE_PRODUCT = 'CLEAR_SINGLE_PRODUCT'
 
 export const getAllProducts = products => {
   return {
@@ -12,6 +15,23 @@ export const getAllProducts = products => {
 export const getSingleProduct = product => {
   return {
     type: GET_SINGLE_PRODUCT,
+    product
+  }
+}
+export const clearProduct = () => {
+  return {
+    type: CLEAR_SINGLE_PRODUCT
+  }
+}
+export const deleteProduct = id => {
+  return {
+    type: DELETE_PRODUCT,
+    id
+  }
+}
+export const updateProduct = product => {
+  return {
+    type: UPDATE_PRODUCT,
     product
   }
 }
@@ -36,6 +56,31 @@ export const fetchSingleProduct = id => {
     }
   }
 }
+export const clearSingleProduct = () => {
+  return dispatch => {
+    dispatch(clearProduct())
+  }
+}
+export const deleteProductThunk = id => {
+  return async dispatch => {
+    try {
+      dispatch(deleteProduct(id))
+      await Axios.delete(`/api/products/${id}`)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+export const updateProductThunk = product => {
+  return async dispatch => {
+    try {
+      const {data} = await Axios.put(`/api/products/${product.id}`)
+      dispatch(updateProduct(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 const initialState = {
   products: [],
@@ -47,6 +92,15 @@ function productsReducer(state = initialState, action) {
     case GET_ALL_PRODUCTS:
       return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
+      return {...state, product: action.product}
+    case CLEAR_SINGLE_PRODUCT:
+      return {...state, product: {}}
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(prod => prod.id !== action.id)
+      }
+    case UPDATE_PRODUCT:
       return {...state, product: action.product}
     default:
       return state
