@@ -16,7 +16,7 @@ router.post('/login', async (req, res, next) => {
       req.login(user, err => (err ? next(err) : res.json(user)))
       const cart = await Orders.findOrCreate({
         where: {
-          userID: user.id,
+          userId: user.id,
           complete: false
         }
       })
