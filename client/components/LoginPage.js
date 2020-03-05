@@ -2,16 +2,13 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
-import LoginPage from './components/LoginPage'
-import AllProducts from './components/AllProducts'
-import Item from './components/Item'
-import {me} from './store'
+import {Login, Signup, UserHome} from './index'
+import {me} from '../store'
 
 /**
  * COMPONENT
  */
-class Routes extends Component {
+class LoginPage extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
@@ -21,18 +18,10 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={LoginPage} />
-        <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/products/:id" component={Item} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={AllProducts} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/home" component={UserHome} />
+        <Route component={Login} />
       </Switch>
     )
   }
@@ -59,12 +48,12 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(connect(mapState, mapDispatch)(LoginPage))
 
 /**
  * PROP TYPES
  */
-Routes.propTypes = {
+LoginPage.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
