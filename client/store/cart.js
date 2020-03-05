@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 //anonymous cart
 const initialState = {}
@@ -21,33 +20,37 @@ export const addToCart = productId => {
   }
 }
 
-export const getCartThunk = () => {
+export const getCartThunk = userId => {
   return async dispatch => {
     try {
-      const res = await axios.get('/api/order')
+      const {data} = await axios.get(`/api/order/cart/${userId}`)
+      console.log('data', data)
+      dispatch(getCart(data))
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-export const addToCartThunk = () => {
+export const addToCartThunk = productId => {
   return async dispatch => {
     try {
-      const res = await axios.put('/api/order')
+      const res = await axios.post(`/api/order/${productId}`)
+      dispatch(addToCart(res.data))
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-export default (cartReducer = (state = initialState, action) => {
+export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
+      console.log('action', action.cart)
       return action.cart
     case ADD_TO_CART:
       return {...state, items: [...state.items, action.productId]}
     default:
       return state
   }
-})
+}
