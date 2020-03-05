@@ -3,13 +3,13 @@ import Axios from 'axios'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
-const getAllProducts = products => {
+export const getAllProducts = products => {
   return {
     type: GET_ALL_PRODUCTS,
     products
   }
 }
-const getSingleProduct = product => {
+export const getSingleProduct = product => {
   return {
     type: GET_SINGLE_PRODUCT,
     product
