@@ -4,6 +4,7 @@ const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const CLEAR_SINGLE_PRODUCT = 'CLEAR_SINGLE_PRODUCT'
 
 export const getAllProducts = products => {
   return {
@@ -15,6 +16,11 @@ export const getSingleProduct = product => {
   return {
     type: GET_SINGLE_PRODUCT,
     product
+  }
+}
+export const clearProduct = () => {
+  return {
+    type: CLEAR_SINGLE_PRODUCT
   }
 }
 export const deleteProduct = id => {
@@ -50,6 +56,11 @@ export const fetchSingleProduct = id => {
     }
   }
 }
+export const clearSingleProduct = () => {
+  return dispatch => {
+    dispatch(clearProduct())
+  }
+}
 export const deleteProductThunk = id => {
   return async dispatch => {
     try {
@@ -82,6 +93,8 @@ function productsReducer(state = initialState, action) {
       return {...state, products: action.products}
     case GET_SINGLE_PRODUCT:
       return {...state, product: action.product}
+    case CLEAR_SINGLE_PRODUCT:
+      return {...state, product: {}}
     case DELETE_PRODUCT:
       return {
         ...state,

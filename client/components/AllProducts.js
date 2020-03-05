@@ -10,7 +10,6 @@ class AllProducts extends React.Component {
 
   render() {
     const productArray = this.props.products
-    console.log(this.state)
     if (!productArray) {
       return (
         <div>

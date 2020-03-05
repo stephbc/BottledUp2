@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchSingleProduct} from '../store/product'
+import {fetchSingleProduct, clearSingleProduct} from '../store/product'
 import {connect} from 'react-redux'
 import ItemForm from './ItemForm'
 // import { addToCart } from '../store/cart'
@@ -8,6 +8,9 @@ class Item extends React.Component {
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id)
   }
+  componentWillUnmount() {
+    this.props.clearSingleProduct()
+  }
 
   // handleClick = id => {
   //   this.props.addToCart(id);
@@ -15,7 +18,8 @@ class Item extends React.Component {
 
   render() {
     const {product} = this.props
-    // let directory = product.type
+    console.log('from render', this.state)
+    if (!product.id) return <div>Loading...</div>
     return (
       <div className="product">
         <img id="productpic" src={`${product.imgUrl}`} height="500" />
@@ -47,7 +51,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchSingleProduct: id => dispatch(fetchSingleProduct(id))
+  fetchSingleProduct: id => dispatch(fetchSingleProduct(id)),
+  clearSingleProduct: () => dispatch(clearSingleProduct())
   // addToCart: id => dispatch(addToCart(id))
 })
 
