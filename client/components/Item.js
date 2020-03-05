@@ -38,7 +38,6 @@ class Item extends React.Component {
         </p>
         <br />
         <div className="admin-update">
-          <h4>UPDATE: </h4>
           <ItemForm product={product} />
         </div>
       </div>
