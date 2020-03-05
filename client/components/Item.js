@@ -1,6 +1,7 @@
 import React from 'react'
 import {fetchSingleProduct} from '../store/product'
 import {connect} from 'react-redux'
+import ItemForm from './ItemForm'
 // import { addToCart } from '../store/cart'
 
 class Item extends React.Component {
@@ -14,8 +15,7 @@ class Item extends React.Component {
 
   render() {
     const {product} = this.props
-    let directory = product.type
-    console.log(directory)
+    // let directory = product.type
     return (
       <div className="product">
         <img id="productpic" src={`${product.imgUrl}`} height="500" />
@@ -32,6 +32,11 @@ class Item extends React.Component {
           <br />
           {product.description}
         </p>
+        <br />
+        <div className="admin-update">
+          <h4>UPDATE: </h4>
+          <ItemForm product={product} />
+        </div>
       </div>
     )
   }

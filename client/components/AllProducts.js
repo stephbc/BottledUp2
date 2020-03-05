@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchAllProducts} from '../store/product'
+import {fetchAllProducts, deleteProductThunk} from '../store/product'
 import SingleProduct from './SingleProduct'
 
 class AllProducts extends React.Component {
@@ -26,7 +26,16 @@ class AllProducts extends React.Component {
           <div className="products-container">
             <ul>
               {productArray.map(product => {
-                return <SingleProduct product={product} key={product.id} />
+                return (
+                  <div key={product.id}>
+                    {/* <button
+                      type="button"
+                      onClick={ () => this.props.deleteProductThunk(product.id) }>
+                      DELETE ITEM
+                    </button> */}
+                    <SingleProduct product={product} />
+                  </div>
+                )
               })}
             </ul>
           </div>
@@ -41,7 +50,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllProducts: () => dispatch(fetchAllProducts())
+  fetchAllProducts: () => dispatch(fetchAllProducts()),
+  deleteProductThunk: id => dispatch(deleteProductThunk(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
