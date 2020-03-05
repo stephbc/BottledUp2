@@ -13,12 +13,12 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
-      const cart = await Orders.findOrCreate({
-        where: {
-          userID: user.id,
-          complete: false
-        }
-      })
+      // const cart = await Orders.findOrCreate({
+      //   where: {
+      //     userID: user.id,
+      //     complete: false
+      //   }
+      // })
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
