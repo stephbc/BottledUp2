@@ -1,6 +1,10 @@
 const router = require('express').Router()
-const {Product, User, ProductOrders} = require('../db/models')
+// const {} = require('../db/models')
+//no idea why, but destructuring the orders model isn't working, importing it seperately fixes the error
 const Orders = require('../db/models/orders')
+const Product = require('../db/models/product')
+const User = require('../db/models/user')
+const ProductOrders = require('../db/models/productOrders')
 
 const checkIfAdmin = (req, res, next) => {
   if (req.user === undefined || req.user.accountType !== 'Admin') {
@@ -29,9 +33,9 @@ router.get('/cart/:userId', async (req, res, next) => {
       (thisUser && req.user.email === thisUser.email) ||
       (req.user && req.user.accountType === 'Admin')
     ) {
-      const ownCart = await Orders.findAll({
+      const ownCart = await Orders.findOne({
         where: {
-          userId: thisUser.id,
+          userId: req.params.userId,
           complete: false
         }
       })
