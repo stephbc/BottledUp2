@@ -1,20 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {updateProductThunk} from '../store/product'
-import {me} from '../store'
 
 export class ItemForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = this.props.product
-    // {
-    //   name: '',
-    //   type: '',
-    //   material: '',
-    //   price: '',
-    //   color: '',
-    //   description: ''
-    // };
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -27,29 +18,24 @@ export class ItemForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const formatted = {
-      ...this.state,
-      price: Number(this.state.price)
-    }
-    this.props.updateProductThunk(formatted)
-    this.setState({
-      name: '',
-      type: '',
-      material: '',
-      price: '',
-      color: '',
-      description: ''
-    })
+    // const formatted = {
+    //   ...this.state,
+    //   price: Number(this.state.price)
+    // }
+    this.props.updateProductThunk(this.state)
+    this.setState(this.props.product)
   }
 
   render() {
-    // console.log(this.props.user)
-    const product = this.props.product
+    // const product = this.props.product
+    console.log('form state', this.state)
+    console.log('actual product', this.props.product)
+
     if (this.props.user.accountType === 'Admin') {
       return (
         <div>
           <h4>UPDATE: </h4>
-          <form onSubmit={() => this.handleSubmit}>
+          <form onSubmit={evt => this.handleSubmit(evt)}>
             <label htmlFor="item-name">Item name: </label>
             <input
               onChange={this.handleChange}
@@ -111,15 +97,11 @@ export class ItemForm extends React.Component {
 
 const mapStateToProps = state => ({
   product: state.products.product,
-  user: state.user,
-  isLoggedIn: !!state.user.id
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateProductThunk: product => dispatch(updateProductThunk(product)),
-  loadInitialData() {
-    dispatch(me())
-  }
+  updateProductThunk: product => dispatch(updateProductThunk(product))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemForm)

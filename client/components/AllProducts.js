@@ -10,13 +10,26 @@ class AllProducts extends React.Component {
 
   render() {
     const productArray = this.props.products
-    if (!productArray) {
+    if (this.props.user.accountType === 'Admin') {
       return (
         <div>
-          <p>
-            Why is it so empty in here? Call the police! Someone stole our
-            bottles!
-          </p>
+          <div className="products-container">
+            <ul>
+              {productArray.map(product => {
+                return (
+                  <div key={product.id}>
+                    <button
+                      type="button"
+                      onClick={() => this.props.deleteProductThunk(product.id)}
+                    >
+                      DELETE ITEM
+                    </button>
+                    <SingleProduct product={product} />
+                  </div>
+                )
+              })}
+            </ul>
+          </div>
         </div>
       )
     } else {
@@ -27,11 +40,6 @@ class AllProducts extends React.Component {
               {productArray.map(product => {
                 return (
                   <div key={product.id}>
-                    {/* <button
-                      type="button"
-                      onClick={ () => this.props.deleteProductThunk(product.id) }>
-                      DELETE ITEM
-                    </button> */}
                     <SingleProduct product={product} />
                   </div>
                 )
@@ -45,7 +53,8 @@ class AllProducts extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.products
+  products: state.products.products,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
