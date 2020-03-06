@@ -82,9 +82,9 @@ router.put('/checkout', async (req, res, next) => {
             productId: el.id
           }
         })
-        throughItem.priceAtPurchase(el.price)
+        await throughItem.priceAtPurchase(el.price)
       })
-      cart.completion()
+      await cart.completion()
     }
   } catch (err) {
     next(err)
