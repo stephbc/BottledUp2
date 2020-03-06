@@ -52,7 +52,6 @@ export const getCartThunk = userId => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/orders/cart/${userId}`)
-      console.log('data', data)
       dispatch(getCart(data))
     } catch (error) {
       console.error(error)
@@ -95,7 +94,7 @@ export const removeFromCartThunk = productId => {
 export const updateQuantityThunk = (productId, qty) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/orders/${productId}/${qty}`)
+      await axios.put(`/api/orders/${productId}/count/${qty}`)
       dispatch(updateQuantity(productId, qty))
     } catch (error) {
       console.error(error)
