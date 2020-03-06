@@ -20,4 +20,8 @@ const Orders = db.define('orders', {
   }
 })
 
+Orders.prototype.completion = () => {
+  this.complete = true
+}
+
 module.exports = Orders

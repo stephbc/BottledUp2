@@ -1,10 +1,15 @@
 import React from 'react'
 import {fetchSingleProduct, clearSingleProduct} from '../store/product'
+import {addToCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import ItemForm from './ItemForm'
 // import { addToCart } from '../store/cart'
 
 class Item extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id)
   }
@@ -12,9 +17,10 @@ class Item extends React.Component {
     this.props.clearSingleProduct()
   }
 
-  // handleClick = id => {
-  //   this.props.addToCart(id);
-  // }
+  handleClick = id => {
+    this.props.addToCartThunk(id)
+    window.alert('Added to Cart!')
+  }
 
   render() {
     const {product} = this.props
@@ -52,7 +58,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchSingleProduct: id => dispatch(fetchSingleProduct(id)),
-  clearSingleProduct: () => dispatch(clearSingleProduct())
+  clearSingleProduct: () => dispatch(clearSingleProduct()),
+  addToCartThunk: id => dispatch(addToCartThunk(id))
   // addToCart: id => dispatch(addToCart(id))
 })
 

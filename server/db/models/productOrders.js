@@ -16,4 +16,8 @@ const ProductOrders = db.define('productOrders', {
   }
 })
 
+ProductOrders.prototype.priceAtPurchase = price => {
+  this.priceAtPurchase = price
+}
+
 module.exports = ProductOrders
