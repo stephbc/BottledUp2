@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const {Product, Orders, User, ProductOrders} = require('../db/models')
+const {Product, User, ProductOrders} = require('../db/models')
+const Orders = require('../db/models/orders')
 
 const checkIfAdmin = (req, res, next) => {
   if (req.user === undefined || req.user.accountType !== 'Admin') {
