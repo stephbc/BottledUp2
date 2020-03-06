@@ -3,7 +3,6 @@ import {fetchSingleProduct, clearSingleProduct} from '../store/product'
 import {addToCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import ItemForm from './ItemForm'
-// import { addToCart } from '../store/cart'
 
 class Item extends React.Component {
   constructor() {
@@ -24,7 +23,6 @@ class Item extends React.Component {
 
   render() {
     const {product} = this.props
-    console.log('from render', this.state)
     if (!product.id) return <div>Loading...</div>
     return (
       <div className="product">
@@ -44,7 +42,6 @@ class Item extends React.Component {
         </p>
         <br />
         <div className="admin-update">
-          <h4>UPDATE: </h4>
           <ItemForm product={product} />
         </div>
       </div>
@@ -60,7 +57,6 @@ const mapDispatchToProps = dispatch => ({
   fetchSingleProduct: id => dispatch(fetchSingleProduct(id)),
   clearSingleProduct: () => dispatch(clearSingleProduct()),
   addToCartThunk: id => dispatch(addToCartThunk(id))
-  // addToCart: id => dispatch(addToCart(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item)
