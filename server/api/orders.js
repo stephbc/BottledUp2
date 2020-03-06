@@ -97,7 +97,7 @@ router.put('/checkout', async (req, res, next) => {
   }
 })
 
-router.put('/:productId/:qty', async (req, res, next) => {
+router.put('/:productId/count/:qty', async (req, res, next) => {
   try {
     if (req.user) {
       const cart = await Orders.findOne({
@@ -113,15 +113,16 @@ router.put('/:productId/:qty', async (req, res, next) => {
         }
       })
       productInCart.quantity = req.params.qty
-      await ProductOrders.update(
-        {
-          where: {
-            orderId: cart.id,
-            productId: req.params.productId
-          }
-        },
-        productInCart
-      )
+      await productInCart.save()
+      // await ProductOrders.update(
+      //   {
+      //     where: {
+      //       orderId: cart.id,
+      //       productId: req.params.productId
+      //     }
+      //   },
+      //   productInCart
+      // )
 
       if (productInCart.quantity === req.params.qty) res.sendStatus(200)
       else res.send('failed to change quantity')

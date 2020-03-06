@@ -18,19 +18,11 @@ export class ItemForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    // const formatted = {
-    //   ...this.state,
-    //   price: Number(this.state.price)
-    // }
-    this.props.updateProductThunk(this.state)
-    this.setState(this.props.product)
+    const product = this.props.updateProductThunk(this.state)
+    this.setState(product)
   }
 
   render() {
-    // const product = this.props.product
-    console.log('form state', this.state)
-    console.log('actual product', this.props.product)
-
     if (this.props.user.accountType === 'Admin') {
       return (
         <div>

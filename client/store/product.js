@@ -74,7 +74,7 @@ export const deleteProductThunk = id => {
 export const updateProductThunk = product => {
   return async dispatch => {
     try {
-      const {data} = await Axios.put(`/api/products/${product.id}`)
+      const {data} = await Axios.put(`/api/products/${product.id}`, product)
       dispatch(updateProduct(data))
     } catch (error) {
       console.error(error)
