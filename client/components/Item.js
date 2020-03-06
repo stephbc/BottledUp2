@@ -19,7 +19,7 @@ class Item extends React.Component {
 
   handleClick = id => {
     this.props.addToCartThunk(id)
-    window.alert('Added to Cart!')
+    Window.alert('Added to Cart!')
   }
 
   render() {
