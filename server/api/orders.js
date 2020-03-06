@@ -58,7 +58,33 @@ router.post('/:productId', async (req, res, next) => {
         }
       })
       const association = await cart.addProduct(product)
-      if (association) res.json(association, product)
+      if (association) res.json(product)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/checkout', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const cart = await Orders.findOne({
+        where: {
+          complete: false,
+          userId: req.user.id
+        }
+      })
+      const itemsInCart = cart.getProducts()
+      itemsInCart.forEach(async el => {
+        const throughItem = await ProductOrders.findOne({
+          where: {
+            orderId: cart.id,
+            productId: el.id
+          }
+        })
+        await throughItem.priceAtPurchase(el.price)
+      })
+      await cart.completion()
     }
   } catch (err) {
     next(err)

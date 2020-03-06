@@ -1,10 +1,14 @@
 import React from 'react'
 import {fetchSingleProduct, clearSingleProduct} from '../store/product'
+import {addToCartThunk} from '../store/cart'
 import {connect} from 'react-redux'
 import ItemForm from './ItemForm'
-import {addToCartThunk} from '../store/cart'
 
 class Item extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id)
   }
@@ -14,6 +18,7 @@ class Item extends React.Component {
 
   handleClick = id => {
     this.props.addToCartThunk(id)
+    Window.alert('Added to Cart!')
   }
 
   render() {
