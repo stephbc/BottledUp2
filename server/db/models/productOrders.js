@@ -16,7 +16,7 @@ const ProductOrders = db.define('productOrders', {
   }
 })
 
-ProductOrders.prototype.priceAtPurchase = price => {
+ProductOrders.prototype.priceAtPurchase = function(price) {
   this.priceAtPurchase = price
 }
 

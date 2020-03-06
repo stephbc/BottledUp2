@@ -20,7 +20,7 @@ const Orders = db.define('orders', {
   }
 })
 
-Orders.prototype.completion = () => {
+Orders.prototype.completion = function() {
   this.complete = true
 }
 
