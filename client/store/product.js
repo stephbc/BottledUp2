@@ -5,6 +5,7 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
 const CLEAR_SINGLE_PRODUCT = 'CLEAR_SINGLE_PRODUCT'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 export const getAllProducts = products => {
   return {
@@ -32,6 +33,12 @@ export const deleteProduct = id => {
 export const updateProduct = product => {
   return {
     type: UPDATE_PRODUCT,
+    product
+  }
+}
+export const addProduct = product => {
+  return {
+    type: ADD_PRODUCT,
     product
   }
 }
@@ -81,6 +88,20 @@ export const updateProductThunk = product => {
     }
   }
 }
+export const addProductThunk = product => {
+  return async dispatch => {
+    try {
+      const formatted = {
+        ...product,
+        price: Number(product.price)
+      }
+      const {data} = await Axios.post(`/api/products/`, formatted)
+      dispatch(addProduct(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 const initialState = {
   products: [],
@@ -102,6 +123,8 @@ function productsReducer(state = initialState, action) {
       }
     case UPDATE_PRODUCT:
       return {...state, product: action.product}
+    case ADD_PRODUCT:
+      return {...state, products: [...state.products, action.product]}
     default:
       return state
   }
