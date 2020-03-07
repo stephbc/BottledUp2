@@ -15,7 +15,10 @@ nav a {
   margin: 1em;
 }
 
-form div {
+form {
   margin: 1em;
-  display: inline-block;
+  display: table-row-group;
+}
+input {
+  margin-bottom: 10px;
 }
