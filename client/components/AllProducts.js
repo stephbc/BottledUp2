@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllProducts, deleteProductThunk} from '../store/product'
 import SingleProduct from './SingleProduct'
+import AddProduct from './AddProduct'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class AllProducts extends React.Component {
     if (this.props.user.accountType === 'Admin') {
       return (
         <div>
+          <AddProduct />
           <div className="products-container">
             <ul>
               {productArray.map(product => {
