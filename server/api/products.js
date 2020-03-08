@@ -34,7 +34,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', checkIfAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
-    if (newProduct) res.json(Product.findAll())
+    if (newProduct) res.json(newProduct)
     else res.sendStatus(500)
   } catch (err) {
     next(err)

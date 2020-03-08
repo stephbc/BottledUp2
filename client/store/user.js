@@ -1,19 +1,17 @@
 import axios from 'axios'
 import history from '../history'
-import {getAllProducts} from './product'
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const GET_ALL_USERS = 'GET_ALL_USERS'
 
 /**
  * INITIAL STATE
  */
 const initialState = {
-  users: [],
+  user: {},
   defaultUser: {}
 }
 
@@ -22,12 +20,6 @@ const initialState = {
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const getAllUsers = users => {
-  return {
-    type: GET_ALL_USERS,
-    users
-  }
-}
 
 /**
  * THUNK CREATORS
@@ -66,16 +58,7 @@ export const logout = () => async dispatch => {
     console.error(err)
   }
 }
-export const fetchAllUsers = () => {
-  return async dispatch => {
-    try {
-      const {data} = await axios.get('/api/users')
-      dispatch(getAllUsers(data))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
+
 /**
  * REDUCER
  */
@@ -85,8 +68,6 @@ export default function(state = initialState, action) {
       return action.user
     case REMOVE_USER:
       return state
-    case GET_ALL_USERS:
-      return {...state, users: action.users}
     default:
       return state
   }
