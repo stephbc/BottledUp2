@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -10,7 +11,12 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome to BOTTED UP! {email}</h3>
+      <Link to="/products">
+        <div className="btn btn-primary btn-raised btn-lg">
+          See Our Products
+        </div>
+      </Link>
     </div>
   )
 }
