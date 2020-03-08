@@ -10,6 +10,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 // const UPDATE_CART = 'UPDATE_CART'
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
+const CHECKOUT = 'CHECKOUT'
 
 export const getCart = cart => {
   return {
@@ -25,12 +26,12 @@ export const addToCart = product => {
   }
 }
 
-export const removeFromCart = productId => {
-  return {
-    type: REMOVE_FROM_CART,
-    productId
-  }
-}
+// export const removeFromCart = restOfCart => {
+//   return {
+//     type: REMOVE_FROM_CART,
+//     restOfCart
+//   }
+// }
 
 // export const updateCart = (productId, productUpdates) => {
 //   return {
@@ -45,6 +46,13 @@ export const updateQuantity = (productId, qty) => {
     type: UPDATE_QUANTITY,
     productId,
     qty
+  }
+}
+
+export const checkout = cartId => {
+  return {
+    type: CHECKOUT,
+    cartId
   }
 }
 
@@ -73,8 +81,8 @@ export const addToCartThunk = productId => {
 export const removeFromCartThunk = productId => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/orders/${productId}`)
-      dispatch(removeFromCart(productId))
+      const {data} = await axios.delete(`/api/orders/${productId}`)
+      dispatch(getCart(data))
     } catch (error) {
       console.error(error)
     }
@@ -101,11 +109,20 @@ export const updateQuantityThunk = (productId, qty) => {
     }
   }
 }
+export const checkoutThunk = cartId => {
+  return async dispatch => {
+    try {
+      await axios.put('/api/orders/checkout')
+      dispatch(checkout(cartId))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      console.log('action', action.cart)
       return action.cart
     case ADD_TO_CART:
       return {...state, items: [...state.items, {...action.product, qty: 1}]}
@@ -119,16 +136,13 @@ export default function cartReducer(state = initialState, action) {
           }
         })
       }
-    case REMOVE_FROM_CART:
-      return {
-        ...state,
-        items: state.items.filter(el => {
-          if (!el.id === action.productId) {
-            return el
-          }
-        })
-      }
-
+    // case REMOVE_FROM_CART:
+    //   return {
+    //     ...state,
+    //     items: action.restOfCart
+    //   }
+    case CHECKOUT:
+      return 'Thank you for shopping at BottledUp!'
     default:
       return state
   }
