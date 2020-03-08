@@ -6,8 +6,10 @@ import {Login, Signup, UserHome} from './components'
 import LoginPage from './components/LoginPage'
 import AllProducts from './components/AllProducts'
 import Item from './components/Item'
+import AdminView from './components/AdminView'
 import {me} from './store'
 import Viewcart from './components/Viewcart'
+import AllUsers from './components/AllUsers'
 
 /**
  * COMPONENT
@@ -32,6 +34,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/adminview" component={AdminView} />
+            <Route exact path="/users" component={AllUsers} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
