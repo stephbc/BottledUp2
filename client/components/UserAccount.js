@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {me} from '../store'
 
 export const UserAccount = props => {
-  console.log(props)
   const {user} = props
   return (
     <div>
