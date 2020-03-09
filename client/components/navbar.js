@@ -4,35 +4,52 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOTTLED UP</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">All Products</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/viewcart">View Cart</Link>
-          <Link to="/adminview">Admin View</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/products">All Products</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/viewcart">View Cart</Link>
-          <Link to="/login">Login</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
+export class Navbar extends React.Component {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = false
+  //   this.logOut = this.logOut.bind(this)
+  // }
+
+  // logOut(){
+  // this.setState = false;
+  // this.props.handleClick();
+  // }
+
+  render() {
+    // console.log("isLoggedIn", this.props.isLoggedIn)
+    // console.log("state", this.state)
+    return (
+      <div>
+        <h1>BOTTLED UP</h1>
+        <nav>
+          {this.props.isLoggedIn ? (
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Link to="/home">Home</Link>
+              <Link to="/products">All Products</Link>
+              <Link to="/signup">Sign Up</Link>
+              <Link to="/viewcart">View Cart</Link>
+              <Link to="/adminview">Admin View</Link>
+              <a href="#" onClick={this.props.handleClick}>
+                Logout
+              </a>
+            </div>
+          ) : (
+            <div>
+              {/* The navbar will show these links before you log in */}
+              <Link to="/products">All Products</Link>
+              <Link to="/signup">Sign Up</Link>
+              <Link to="/viewcart">View Cart</Link>
+              <Link to="/login">Login</Link>
+            </div>
+          )}
+        </nav>
+        <hr />
+      </div>
+    )
+  }
+}
 
 /**
  * CONTAINER
