@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const ProductOrders = require('./productOrders')
+const Product = require('./product')
 
 const Orders = db.define('orders', {
   quantity: {
@@ -23,26 +25,42 @@ const Orders = db.define('orders', {
 Orders.prototype.completion = function() {
   this.complete = true
 }
-Orders.prototype.allItems = function() {
-  let cart = this.getProducts()
-  let quant = cart.reduce((sum, el) => {
-    sum += el.quantity || 1
-    return sum
-  }, 0)
-  this.quantity = quant
-  this.save()
-  return this.quantity
-}
-Orders.prototype.totalPrice = function() {
-  let cart = this.getProducts()
-  let sum = 0
-  cart.map(el => {
-    if (el.quantity) {
-      sum += el.price * el.quantity
-    } else sum += el.price
+Orders.prototype.allItems = async function() {
+  let cart = await ProductOrders.findAll({
+    where: {
+      orderId: this.id
+    }
   })
-  this.totalCost = sum
-  this.save()
+  let quant = 0
+  cart.map(el => {
+    quant += el.quantity || 1
+  })
+  this.quantity = quant
+  await this.save()
+}
+Orders.prototype.totalPrice = async function() {
+  let cart = await ProductOrders.findAll({
+    where: {
+      orderId: this.id
+    }
+  })
+  let sum = 0
+  const eachPrice = cart.forEach(async el => {
+    let price
+    const product = await Product.findAll({
+      where: {
+        id: el.productId
+      }
+    })
+    price = el.quantity * product[0].price
+    sum += price
+  })
+  // eachPrice.forEach(el => {
+  //   sum += el
+  // })
+  console.log(sum)
+  // this.totalCost = sum
+  // await this.save()
 }
 
 module.exports = Orders

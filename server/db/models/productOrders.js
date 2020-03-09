@@ -18,6 +18,7 @@ const ProductOrders = db.define('productOrders', {
 
 ProductOrders.prototype.setQuantity = function(num) {
   this.quantity = num
+  this.save()
 }
 
 module.exports = ProductOrders

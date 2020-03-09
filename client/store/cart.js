@@ -102,8 +102,9 @@ export const removeFromCartThunk = productId => {
 export const updateQuantityThunk = (productId, qty) => {
   return async dispatch => {
     try {
-      await axios.put(`/api/orders/${productId}/count/${qty}`)
-      dispatch(updateQuantity(productId, qty))
+      const {data} = await axios.put(`/api/orders/${productId}/count/${qty}`)
+      // dispatch(updateQuantity(productId, qty))
+      getCartThunk(data)
     } catch (error) {
       console.error(error)
     }
