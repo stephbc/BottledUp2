@@ -22,3 +22,7 @@ form {
 input {
   margin-bottom: 10px;
 }
+
+.checkout {
+  text-align: center;
+}
