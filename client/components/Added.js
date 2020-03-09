@@ -4,11 +4,16 @@ export const Added = props => {
   let quantity = props.quantity
   if (!props.buttonClick) {
     return <div />
-  } else {
+  } else if (quantity === 1) {
     return (
       <div>
-        <p>Added {quantity} to Cart!</p>
+        <p>Added to Cart!</p>
       </div>
     )
-  }
+  } else
+    return (
+      <div>
+        <p>Click again to put {quantity} in your Cart!</p>
+      </div>
+    )
 }

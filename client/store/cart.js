@@ -125,7 +125,7 @@ export default function cartReducer(state = initialState, action) {
     case GET_CART:
       return action.cart
     case ADD_TO_CART:
-      return {...state, items: [...state.items, {...action.product, qty: 1}]}
+      return {...state, items: [...state.items, action.product]}
     case UPDATE_QUANTITY:
       return {
         ...state,

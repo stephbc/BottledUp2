@@ -28,13 +28,9 @@ class Item extends React.Component {
   }
 
   handleClick = id => {
-    if (this.state.quantity < 2) {
-      this.props.addToCartThunk(id)
-      this.setState({buttonClick: true})
-    } else {
-      this.props.updateQuantityThunk(id, this.state.quantity)
-      this.setState({buttonClick: true})
-    }
+    this.props.addToCartThunk(id)
+    this.props.updateQuantityThunk(id, this.state.quantity)
+    this.setState({buttonClick: true})
   }
 
   render() {

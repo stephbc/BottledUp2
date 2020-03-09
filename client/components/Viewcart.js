@@ -30,6 +30,8 @@ class Viewcart extends React.Component {
         <div>
           <div className="cart">
             <div>Your Cart</div>
+            <h2>There are {cart.quantity} items in your cart</h2>
+            <h3>Total Price: {cart.totalCost}</h3>
             <ul>
               {cart.map(product => {
                 return (
@@ -38,7 +40,7 @@ class Viewcart extends React.Component {
                       type="button"
                       onClick={() => this.props.removeFromCartThunk(product.id)}
                     >
-                      DELETE ITEM
+                      Remove from Cart
                     </button>
                     <p>Quantity: {product.productOrders.quantity || 1}</p>
                     <SingleProduct product={product} />
@@ -61,7 +63,7 @@ class Viewcart extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart,
+    cart: state.cartReducer,
     user: state.user,
     isLoggedIn: !!state.user.id
   }
