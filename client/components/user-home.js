@@ -11,7 +11,9 @@ export const UserHome = props => {
 
   return (
     <div>
+
       <h3>Welcome to BOTTLED UP! {email}</h3>
+      <h3>Welcome to BottledUp, {email}</h3>
       <Link to="/products">
         <div className="btn btn-primary btn-raised btn-lg">
           See Our Products

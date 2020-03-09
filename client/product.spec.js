@@ -1,11 +1,7 @@
 import {expect} from 'chai'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import {
-  getAllProducts,
-  getSingleProduct,
-  fetchAllProducts
-} from './store/product'
+import {getAllProducts, getSingleProduct} from './store/product'
 import appReducer from './store/product'
 import {createStore} from 'redux'
 
@@ -40,13 +36,6 @@ describe('Products', () => {
           type: 'GET_ALL_PRODUCTS',
           products
         })
-      })
-
-      xit('fetchAllProducts thunk creator', async () => {
-        await fakeStore.dispatch(fetchAllProducts())
-        const actions = fakeStore.getActions()
-        expect(actions[0].type).to.equal('GET_ALL_PRODUCTS')
-        expect(actions[0].products).to.deep.equal(products)
       })
     })
 
