@@ -62,16 +62,27 @@ router.post('/:productId', async (req, res, next) => {
           id: req.params.productId
         }
       })
-      await cart.addProduct(product)
-      const association = await ProductOrders.findOne({
+      const alreadyInCart = await ProductOrders.findOne({
         where: {
           orderId: cart.id,
           productId: product.id
         }
       })
-      if (association) {
-        association.quantity = 1
-        await association.save()
+      if (alreadyInCart) {
+        alreadyInCart.quantity++
+        alreadyInCart.save()
+      } else {
+        await cart.addProduct(product)
+        const association = await ProductOrders.findOne({
+          where: {
+            orderId: cart.id,
+            productId: product.id
+          }
+        })
+        if (association) {
+          association.quantity = 1
+          await association.save()
+        }
         await cart.allItems()
         await cart.totalPrice()
         res.json(product)
@@ -132,22 +143,31 @@ router.put('/:productId/count/:qty', async (req, res, next) => {
           productId: req.params.productId
         }
       })
-      // if (!productInCart) {
-      //   const product = await Product.findOne({
-      //     where: {
-      //       id: req.params.productId
-      //     }
-      //   })
-      //   productInCart = await cart.addProduct(product)
-      // }
-      productInCart.quantity = req.params.qty
-      await productInCart.save()
-      // await productInCart.setQuantity(req.params.qty)
+      if (!productInCart) {
+        const product = await Product.findOne({
+          where: {
+            id: req.params.productId
+          }
+        })
+        await cart.addProduct(product)
+        productInCart = await ProductOrders.findOne({
+          where: {
+            orderId: cart.id,
+            productId: req.params.productId
+          }
+        })
+      }
+      for (let i = 0; i < req.params.qty; i++) {
+        productInCart.quantity++
+        await productInCart.save()
+      }
+      // productInCart.quantity = parseInt(productInCart.quantity, 10) + req.params.qty
+      // await productInCart.save()
       await cart.totalPrice()
       await cart.allItems()
 
       if (productInCart.quantity === req.params.qty) {
-        res.sendStatus(200)
+        res.status(200).json(req.user.id)
       } else res.send('failed to change quantity')
     }
   } catch (err) {

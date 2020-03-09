@@ -28,8 +28,8 @@ class Item extends React.Component {
   }
 
   handleClick = id => {
-    this.props.addToCartThunk(id)
-    this.props.updateQuantityThunk(id, this.state.quantity)
+    if (this.state.quantity === 1) this.props.addToCartThunk(id)
+    else this.props.updateQuantityThunk(id, this.state.quantity)
     this.setState({buttonClick: true})
   }
 
