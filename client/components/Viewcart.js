@@ -5,6 +5,7 @@ import {getCartThunk, removeFromCartThunk, checkoutThunk} from '../store/cart'
 import SingleProduct from './SingleProduct'
 import {me} from '../store'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 class Viewcart extends React.Component {
   constructor() {
@@ -49,13 +50,15 @@ class Viewcart extends React.Component {
               })}
             </ul>
           </div>
-          <button
-            name="Checkout"
-            type="submit"
-            onClick={() => this.handleClick()}
-          >
-            Checkout
-          </button>
+          <Link to="/checkout">
+            <button
+              name="Checkout"
+              type="submit"
+              onClick={() => this.handleClick()}
+            >
+              Checkout
+            </button>
+          </Link>
         </div>
       )
   }
