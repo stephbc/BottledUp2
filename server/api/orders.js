@@ -62,8 +62,20 @@ router.post('/:productId', async (req, res, next) => {
           id: req.params.productId
         }
       })
-      const association = await cart.addProduct(product)
-      if (association) res.json(product)
+      await cart.addProduct(product)
+      const association = await ProductOrders.findOne({
+        where: {
+          orderId: cart.id,
+          productId: product.id
+        }
+      })
+      if (association) {
+        association.quantity = 1
+        await association.save()
+        await cart.allItems()
+        await cart.totalPrice()
+        res.json(product)
+      }
     }
   } catch (err) {
     next(err)
@@ -91,6 +103,13 @@ router.put('/checkout', async (req, res, next) => {
         await throughItem.save()
       })
       await cart.completion()
+      const user = await User.findOne({
+        where: {
+          id: req.user.id
+        }
+      })
+      const newCart = await Orders.create()
+      await user.addOrder(newCart)
     }
   } catch (err) {
     next(err)
@@ -106,17 +125,30 @@ router.put('/:productId/count/:qty', async (req, res, next) => {
           userId: req.user.id
         }
       })
-      const productInCart = await ProductOrders.findOne({
+      let productInCart
+      productInCart = await ProductOrders.findOne({
         where: {
           orderId: cart.id,
           productId: req.params.productId
         }
       })
+      // if (!productInCart) {
+      //   const product = await Product.findOne({
+      //     where: {
+      //       id: req.params.productId
+      //     }
+      //   })
+      //   productInCart = await cart.addProduct(product)
+      // }
       productInCart.quantity = req.params.qty
       await productInCart.save()
+      // await productInCart.setQuantity(req.params.qty)
+      await cart.totalPrice()
+      await cart.allItems()
 
-      if (productInCart.quantity === req.params.qty) res.sendStatus(200)
-      else res.send('failed to change quantity')
+      if (productInCart.quantity === req.params.qty) {
+        res.sendStatus(200)
+      } else res.send('failed to change quantity')
     }
   } catch (err) {
     next(err)
@@ -139,7 +171,11 @@ router.delete('/:productId', async (req, res, next) => {
       })
       const deleted = await cart.removeProduct(product)
       const restOfCart = await cart.getProducts()
-      if (deleted) res.status(200).json(restOfCart)
+      if (deleted) {
+        cart.allItems()
+        cart.totalPrice()
+        res.status(200).json(restOfCart)
+      }
     }
   } catch (err) {
     next(err)
