@@ -9,7 +9,6 @@ const users = [
     lastName: 'An',
     email: 'janeAn@gmail.com',
     password: 'janean',
-    address: 'new york',
     accountType: 'Admin'
   },
   {
@@ -17,7 +16,6 @@ const users = [
     lastName: 'N',
     email: 'jenniferN@gmail.com',
     password: 'jenniferN',
-    address: 'new york',
     accountType: 'Admin'
   },
   {
@@ -25,7 +23,6 @@ const users = [
     lastName: 'Burrous',
     email: 'rachelBurrous@gmail.com',
     password: 'rachelburrous',
-    address: 'new york',
     accountType: 'Admin'
   },
   {
@@ -33,7 +30,6 @@ const users = [
     lastName: 'Chiang',
     email: 'stephaniebchiang@gmail.com',
     password: 'stephaniec',
-    address: 'new york',
     accountType: 'Admin'
   }
 ]
