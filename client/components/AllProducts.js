@@ -16,21 +16,19 @@ class AllProducts extends React.Component {
         <div>
           <AddProduct />
           <div className="products-container">
-            <ul>
-              {productArray.map(product => {
-                return (
-                  <div key={product.id}>
-                    <button
-                      type="button"
-                      onClick={() => this.props.deleteProductThunk(product.id)}
-                    >
-                      DELETE ITEM
-                    </button>
-                    <SingleProduct product={product} />
-                  </div>
-                )
-              })}
-            </ul>
+            {productArray.map(product => {
+              return (
+                <div key={product.id}>
+                  <button
+                    type="button"
+                    onClick={() => this.props.deleteProductThunk(product.id)}
+                  >
+                    DELETE ITEM
+                  </button>
+                  <SingleProduct product={product} />
+                </div>
+              )
+            })}
           </div>
         </div>
       )
@@ -38,15 +36,13 @@ class AllProducts extends React.Component {
       return (
         <div>
           <div className="products-container">
-            <ul>
-              {productArray.map(product => {
-                return (
-                  <div key={product.id}>
-                    <SingleProduct product={product} />
-                  </div>
-                )
-              })}
-            </ul>
+            {productArray.map(product => {
+              return (
+                <div key={product.id}>
+                  <SingleProduct product={product} />
+                </div>
+              )
+            })}
           </div>
         </div>
       )
