@@ -19,9 +19,9 @@ class LoginPage extends Component {
     return (
       <Switch>
         <Route path="/login" component={Login} />
+        <Route component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/home" component={UserHome} />
-        <Route component={Login} />
       </Switch>
     )
   }
