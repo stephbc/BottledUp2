@@ -40,7 +40,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   address: {
-    type: Sequelize.STRING
+    type: Sequelize.ARRAY
   },
   accountType: {
     type: Sequelize.STRING,

@@ -19,6 +19,14 @@ const Orders = db.define('orders', {
     validate: {
       notEmpty: true
     }
+  },
+  address: {
+    type: Sequelize.ARRAY,
+    defaultValue: ['5 Hanover Square', 'New York', 'New York', 10016, 'USA']
+  },
+  billingInfo: {
+    type: Sequelize.ARRAY,
+    defaultValue: ['cardnumber', 'expMonth', 'expYear', 'cvc']
   }
 })
 

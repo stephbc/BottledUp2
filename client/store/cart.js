@@ -49,10 +49,12 @@ export const updateQuantity = (productId, qty) => {
   }
 }
 
-export const checkout = cartId => {
+export const checkout = (cartId, address, billingInfo) => {
   return {
     type: CHECKOUT,
-    cartId
+    cartId,
+    address,
+    billingInfo
   }
 }
 
@@ -110,11 +112,11 @@ export const updateQuantityThunk = (productId, qty) => {
     }
   }
 }
-export const checkoutThunk = cartId => {
+export const checkoutThunk = (cartId, address, billingInfo) => {
   return async dispatch => {
     try {
       await axios.put('/api/orders/checkout')
-      dispatch(checkout(cartId))
+      dispatch(checkout(cartId, address, billingInfo))
     } catch (error) {
       console.error(error)
     }

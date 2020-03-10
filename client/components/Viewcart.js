@@ -18,9 +18,9 @@ class Viewcart extends React.Component {
     this.props.getCartThunk(data.id)
   }
 
-  handleClick() {
-    this.props.checkoutThunk(this.props.cart.id)
-  }
+  // handleClick() {
+  //   this.props.checkoutThunk(this.props.cart.id)
+  // }
 
   render() {
     const cart = this.props.cart
@@ -52,11 +52,7 @@ class Viewcart extends React.Component {
             </ul>
           </div>
           <Link to="/checkout">
-            <button
-              name="Checkout"
-              type="submit"
-              onClick={() => this.handleClick()}
-            >
+            <button name="Checkout" type="submit">
               Checkout
             </button>
           </Link>
