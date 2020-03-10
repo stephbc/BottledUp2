@@ -6,7 +6,6 @@ import AllUsers from './AllUsers'
 
 class AdminView extends Component {
   render() {
-    console.log('props from adminview', this.props)
     if (this.props.user.accountType === 'Admin') {
       return (
         <div>

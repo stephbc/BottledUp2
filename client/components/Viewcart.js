@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom'
 class Viewcart extends React.Component {
   constructor() {
     super()
-    this.handleClick = this.handleClick.bind(this)
+    // this.handleClick = this.handleClick.bind(this)
   }
 
   async componentDidMount() {
@@ -24,8 +24,10 @@ class Viewcart extends React.Component {
 
   render() {
     const cart = this.props.cart
+    // console.log(this.props.cart.items)
     const user = this.props.user
-    if (!user.id) return <div>Please Log in to see your cart</div>
+    if (!user.id && cart.items)
+      return <div>{cart.items.map(item => <p>{item.name}</p>)}</div>
     if (!cart.length) return <div>Cart Is Empty - Go Pop Some Bottles!</div>
     else
       return (
