@@ -24,7 +24,7 @@ class Viewcart extends React.Component {
 
   render() {
     const cart = this.props.cart
-    const {user} = this.props.user
+    const user = this.props.user
     if (!user.id) return <div>Please Log in to see your cart</div>
     if (!cart.length) return <div>Cart Is Empty - Go Pop Some Bottles!</div>
     else

@@ -39,8 +39,8 @@ router.get('/cart/:userId', async (req, res, next) => {
           complete: false
         }
       })
-      const cartProducts = await ownCart.getProducts()
-      res.json(cartProducts)
+      const data = await ownCart.getProducts()
+      res.json(data)
     }
   } catch (err) {
     next(err)
