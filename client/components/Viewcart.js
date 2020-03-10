@@ -24,16 +24,20 @@ class Viewcart extends React.Component {
 
   render() {
     const cart = this.props.cart
-    if (!cart.length) return <div>Cart Is Empty - Go Pop Some Bottles!</div>
+    const user = this.props.user
+    const totalCost = cart.totalCost / 100
+    if (!user.id) return <div>Please Log in to see your cart</div>
+    if (!cart.items.length)
+      return <div>Cart Is Empty - Go Pop Some Bottles!</div>
     else
       return (
         <div>
           <div className="cart">
             <div>Your Cart</div>
             <h2>There are {cart.quantity} items in your cart</h2>
-            <h3>Total Price: {cart.totalCost}</h3>
+            <h3>Total Price: $ {totalCost}</h3>
             <ul>
-              {cart.map(product => {
+              {cart.items.map(product => {
                 return (
                   <div key={product.id}>
                     <button

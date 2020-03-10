@@ -12,10 +12,12 @@ const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
 
-export const getCart = cart => {
+export const getCart = data => {
   return {
     type: GET_CART,
-    cart
+    items: data.items,
+    quantity: data.quantity,
+    totalCost: data.totalCost
   }
 }
 
@@ -131,7 +133,12 @@ export const checkoutThunk = (cartId, address, billingInfo) => {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      return action.cart
+      return {
+        ...state,
+        items: action.items,
+        quantity: action.quantity,
+        totalCost: action.totalCost
+      }
     case ADD_TO_CART:
       return {...state, items: [...state.items, action.product]}
     case UPDATE_QUANTITY:
