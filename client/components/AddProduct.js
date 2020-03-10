@@ -43,7 +43,7 @@ export class AddProduct extends React.Component {
       <div className="additem">
         <h4>ADD NEW ITEM: </h4>
         <form className="addform" onSubmit={this.handleSubmit}>
-          <th>
+          <div>
             <label htmlFor="item-name">Item name: </label>
             <input
               onChange={this.handleChange}
@@ -53,8 +53,8 @@ export class AddProduct extends React.Component {
               required
             />
             <br />
-          </th>
-          <th>
+          </div>
+          <div>
             <label htmlFor="item-type">
               Item type (must be bottle, lid, or straw):{' '}
             </label>
@@ -66,8 +66,8 @@ export class AddProduct extends React.Component {
               required
             />
             <br />
-          </th>
-          <th>
+          </div>
+          <div>
             <label htmlFor="item-materal">Item material: </label>
             <input
               onChange={this.handleChange}
@@ -77,8 +77,8 @@ export class AddProduct extends React.Component {
               required
             />
             <br />
-          </th>
-          <th>
+          </div>
+          <div>
             <label htmlFor="item-price">Item price: </label>
             <input
               onChange={this.handleChange}
@@ -88,8 +88,8 @@ export class AddProduct extends React.Component {
               required
             />
             <br />
-          </th>
-          <th>
+          </div>
+          <div>
             <label htmlFor="item-color">Item color: </label>
             <input
               onChange={this.handleChange}
@@ -98,8 +98,8 @@ export class AddProduct extends React.Component {
               value={this.state.color}
             />
             <br />
-          </th>
-          <th>
+          </div>
+          <div>
             <label htmlFor="item-Url">Item image: </label>
             <input
               onChange={this.handleChange}
@@ -108,8 +108,8 @@ export class AddProduct extends React.Component {
               value={this.state.imgUrl}
             />
             <br />
-          </th>
-          <th>
+          </div>
+          <div>
             <label htmlFor="item-description">Item description: </label>
             <input
               onChange={this.handleChange}
@@ -121,7 +121,7 @@ export class AddProduct extends React.Component {
             <br />
             <button type="submit">ADD NEW ITEM</button>
             <br />
-          </th>
+          </div>
         </form>
       </div>
     )

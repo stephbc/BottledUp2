@@ -23,7 +23,7 @@ class Item extends React.Component {
   }
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      quantity: event.target.value
     })
   }
 
@@ -42,12 +42,18 @@ class Item extends React.Component {
         {/* /public/products/${directory}/ */}
         <h2>{product.name}</h2>
         <h3>{`$${product.price / 100}`}</h3>
-        <input
-          onChange={this.handleChange}
-          name="quantity"
-          type="number"
-          value={this.state.quantity}
-        />
+        <select id="dropdown" onChange={this.handleChange}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
         <button type="button" onClick={() => this.handleClick(product.id)}>
           {' '}
           ADD TO CART{' '}

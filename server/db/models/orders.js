@@ -52,23 +52,22 @@ Orders.prototype.totalPrice = async function() {
       orderId: this.id
     }
   })
+
   let sum = 0
-  const eachPrice = cart.forEach(async el => {
-    let price
-    const product = await Product.findAll({
-      where: {
-        id: el.productId
-      }
+  await Promise.all(
+    cart.map(async el => {
+      let price
+      const product = await Product.findOne({
+        where: {
+          id: el.productId
+        }
+      })
+      price = el.quantity * product.price
+      sum += price
     })
-    price = el.quantity * product[0].price
-    sum += price
-  })
-  // eachPrice.forEach(el => {
-  //   sum += el
-  // })
-  console.log(sum)
-  // this.totalCost = sum
-  // await this.save()
+  )
+  this.totalCost = sum
+  await this.save()
 }
 
 module.exports = Orders

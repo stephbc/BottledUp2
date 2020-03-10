@@ -135,6 +135,11 @@ router.put('/checkout', async (req, res, next) => {
         throughItem.priceAtPurchase = el.price
         await throughItem.save()
       })
+      const {address} = req.body
+      const {billingInfo} = req.body
+      cart.address = address
+      cart.billingInfo = billingInfo
+      await cart.save()
       await cart.completion()
       const user = await User.findOne({
         where: {

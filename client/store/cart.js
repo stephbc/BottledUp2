@@ -120,7 +120,7 @@ export const updateQuantityThunk = (productId, qty) => {
 export const checkoutThunk = (cartId, address, billingInfo) => {
   return async dispatch => {
     try {
-      await axios.put('/api/orders/checkout')
+      await axios.put('/api/orders/checkout', {address, billingInfo})
       dispatch(checkout(cartId, address, billingInfo))
     } catch (error) {
       console.error(error)
@@ -144,11 +144,6 @@ export default function cartReducer(state = initialState, action) {
           }
         })
       }
-    // case REMOVE_FROM_CART:
-    //   return {
-    //     ...state,
-    //     items: action.restOfCart
-    //   }
     case CHECKOUT:
       return 'Thank you for shopping at BottledUp!'
     default:
