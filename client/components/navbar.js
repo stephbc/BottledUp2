@@ -5,21 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 export class Navbar extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = false
-  //   this.logOut = this.logOut.bind(this)
-  // }
-
-  // logOut(){
-  // this.setState = false;
-  // this.props.handleClick();
-  // }
-
   render() {
-    // console.log("isLoggedIn", this.props.isLoggedIn)
-    // console.log("state", this.state)
-    console.log(this.props)
     if (
       this.props.user.accountType === 'Admin' &&
       this.props.isLoggedIn === true

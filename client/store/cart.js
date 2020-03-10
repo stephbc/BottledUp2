@@ -63,8 +63,13 @@ export const checkout = (cartId, address, billingInfo) => {
 export const getCartThunk = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/orders/cart/${userId}`)
-      dispatch(getCart(data))
+      if (userId === undefined) {
+        const {data} = await axios.get('/api/orders/cart')
+        dispatch(getCart(data))
+      } else {
+        const {data} = await axios.get(`/api/orders/cart/${userId}`)
+        dispatch(getCart(data))
+      }
     } catch (error) {
       console.error(error)
     }

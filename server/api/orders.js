@@ -15,6 +15,12 @@ const checkIfAdmin = (req, res, next) => {
   next()
 }
 
+router.use((req, res, next) => {
+  if (!req.session.cart) req.session.cart = []
+  // console.log('SESSION: ', req.session)
+  next()
+})
+
 router.get('/', checkIfAdmin, async (req, res, next) => {
   try {
     const allOrders = await Orders.findAll()
@@ -25,10 +31,19 @@ router.get('/', checkIfAdmin, async (req, res, next) => {
   }
 })
 
+router.get('/cart', (req, res, next) => {
+  try {
+    // console.log(req.session.cart)
+    if (!req.user) res.json(req.session.cart)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/cart/:userId', async (req, res, next) => {
   try {
     const thisUser = await User.findByPk(req.params.userId)
-    if (!req.user) res.sendStatus(401)
+    if (!thisUser) res.sendStatus(401)
     if (
       (thisUser && req.user.email === thisUser.email) ||
       (req.user && req.user.accountType === 'Admin')
@@ -91,6 +106,14 @@ router.post('/:productId', async (req, res, next) => {
         await cart.totalPrice()
         res.json(product)
       }
+    } else {
+      const product = await Product.findOne({
+        where: {
+          id: req.params.productId
+        }
+      })
+      req.session.cart.push(product)
+      res.json(product)
     }
   } catch (err) {
     next(err)
