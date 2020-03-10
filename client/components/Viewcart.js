@@ -24,10 +24,6 @@ class Viewcart extends React.Component {
 
   render() {
     const cart = this.props.cart
-    // console.log(this.props.cart.items)
-    const user = this.props.user
-    if (!user.id && cart.items)
-      return <div>{cart.items.map(item => <p>{item.name}</p>)}</div>
     if (!cart.length) return <div>Cart Is Empty - Go Pop Some Bottles!</div>
     else
       return (
