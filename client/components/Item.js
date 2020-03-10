@@ -37,7 +37,7 @@ class Item extends React.Component {
     const {product} = this.props
     if (!product.id) return <div>Loading...</div>
     return (
-      <div className="product">
+      <div className="item">
         <img id="productpic" src={`${product.imgUrl}`} height="500" />
         {/* /public/products/${directory}/ */}
         <h2>{product.name}</h2>

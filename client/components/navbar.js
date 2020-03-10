@@ -25,10 +25,10 @@ export class Navbar extends React.Component {
       this.props.isLoggedIn === true
     ) {
       return (
-        <div>
-          <h1>BOTTLED UP</h1>
+        <div className="navbar">
+          <h1 className="title">BOTTLED UP</h1>
           <nav>
-            <div>
+            <div className="navlinks">
               <Link to="/home">Home</Link>
               <Link to="/products">All Products</Link>
               <Link to="/signup">My Account</Link>
@@ -43,11 +43,11 @@ export class Navbar extends React.Component {
       )
     } else {
       return (
-        <div>
-          <h1>BOTTLED UP</h1>
+        <div className="navbar">
+          <h1 className="title">BOTTLED UP</h1>
           <nav>
             {this.props.isLoggedIn ? (
-              <div>
+              <div className="navlinks">
                 {/* The navbar will show these links after you log in */}
                 <Link to="/home">Home</Link>
                 <Link to="/products">All Products</Link>
@@ -58,7 +58,7 @@ export class Navbar extends React.Component {
                 </a>
               </div>
             ) : (
-              <div>
+              <div className="navlinks">
                 {/* The navbar will show these links before you log in */}
                 <Link to="/products">All Products</Link>
                 <Link to="/signup">Sign Up</Link>

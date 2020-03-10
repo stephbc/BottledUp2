@@ -26,3 +26,108 @@ input {
 .checkout {
   text-align: center;
 }
+.navbar {
+  display: flex;
+  flex-direction: column;
+  background-image: url('navbar.JPG');
+  background-size: cover;
+  background-position: center;
+  border: solid;
+  border-color: black;
+}
+.navlinks {
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+  font-style: italic;
+  font-family: cursive;
+  color: white;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 80px;
+  font-style: italic;
+  font-family: cursive;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073,
+      0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
+      0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+.products-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url('https://st.depositphotos.com/1541589/4663/i/950/depositphotos_46637523-stock-photo-plastic-bottles-background.jpg');
+  border: solid;
+  border-color: black;
+}
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  width: 150px;
+  height: 300px;
+  border: solid;
+  border-color: black;
+  background-color: whitesmoke;
+}
+img {
+  display: block;
+  max-width: 100px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+.additem {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-color: black;
+  background-color: silver;
+}
+.addform {
+  display: flex;
+  flex-direction: row;
+}
+th {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+label {
+  flex-wrap: wrap;
+}
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url('https://www.lrsrecycles.com/wp-content/uploads/2017/10/Glass.png');
+  border: solid;
+  border-color: black;
+}
+#productpic {
+  height: 200px;
+  width: 700px;
+}

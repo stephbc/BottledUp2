@@ -40,74 +40,88 @@ export class AddProduct extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="additem">
         <h4>ADD NEW ITEM: </h4>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="item-name">Item name: </label>
-          <input
-            onChange={this.handleChange}
-            name="name"
-            type="text"
-            value={this.state.name}
-            required
-          />
-          <br />
-          <label htmlFor="item-type">
-            Item type (must be bottle, lid, or straw):{' '}
-          </label>
-          <input
-            onChange={this.handleChange}
-            name="type"
-            type="text"
-            value={this.state.type}
-            required
-          />
-          <br />
-          <label htmlFor="item-materal">Item material: </label>
-          <input
-            onChange={this.handleChange}
-            name="material"
-            type="text"
-            value={this.state.material}
-            required
-          />
-          <br />
-          <label htmlFor="item-price">Item price: </label>
-          <input
-            onChange={this.handleChange}
-            name="price"
-            type="text"
-            value={this.state.price}
-            required
-          />
-          <br />
-          <label htmlFor="item-color">Item color: </label>
-          <input
-            onChange={this.handleChange}
-            name="color"
-            type="text"
-            value={this.state.color}
-          />
-          <br />
-          <label htmlFor="item-Url">Item image: </label>
-          <input
-            onChange={this.handleChange}
-            name="imgUrl"
-            type="text"
-            value={this.state.imgUrl}
-          />
-          <br />
-          <label htmlFor="item-description">Item description: </label>
-          <input
-            onChange={this.handleChange}
-            name="description"
-            type="text"
-            value={this.state.description}
-            required
-          />
-          <br />
-          <button type="submit">ADD NEW ITEM</button>
-          <br />
+        <form className="addform" onSubmit={this.handleSubmit}>
+          <th>
+            <label htmlFor="item-name">Item name: </label>
+            <input
+              onChange={this.handleChange}
+              name="name"
+              type="text"
+              value={this.state.name}
+              required
+            />
+            <br />
+          </th>
+          <th>
+            <label htmlFor="item-type">
+              Item type (must be bottle, lid, or straw):{' '}
+            </label>
+            <input
+              onChange={this.handleChange}
+              name="type"
+              type="text"
+              value={this.state.type}
+              required
+            />
+            <br />
+          </th>
+          <th>
+            <label htmlFor="item-materal">Item material: </label>
+            <input
+              onChange={this.handleChange}
+              name="material"
+              type="text"
+              value={this.state.material}
+              required
+            />
+            <br />
+          </th>
+          <th>
+            <label htmlFor="item-price">Item price: </label>
+            <input
+              onChange={this.handleChange}
+              name="price"
+              type="text"
+              value={this.state.price}
+              required
+            />
+            <br />
+          </th>
+          <th>
+            <label htmlFor="item-color">Item color: </label>
+            <input
+              onChange={this.handleChange}
+              name="color"
+              type="text"
+              value={this.state.color}
+            />
+            <br />
+          </th>
+          <th>
+            <label htmlFor="item-Url">Item image: </label>
+            <input
+              onChange={this.handleChange}
+              name="imgUrl"
+              type="text"
+              value={this.state.imgUrl}
+            />
+            <br />
+          </th>
+          <th>
+            <label htmlFor="item-description">Item description: </label>
+            <input
+              onChange={this.handleChange}
+              name="description"
+              type="text"
+              value={this.state.description}
+              required
+            />
+            <br />
+            <button type="submit">ADD NEW ITEM</button>
+            <br />
+          </th>
         </form>
       </div>
     )
