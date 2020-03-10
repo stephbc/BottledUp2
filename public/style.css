@@ -43,9 +43,9 @@ input {
   font-family: cursive;
   color: white;
   text-align: center;
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  /* -webkit-animation: glow 1s ease-in-out infinite alternate;
   -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate; */
 }
 .title {
   display: flex;
@@ -55,9 +55,9 @@ input {
   font-family: cursive;
   color: #fff;
   text-align: center;
-  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  /* -webkit-animation: glow 1s ease-in-out infinite alternate;
   -moz-animation: glow 1s ease-in-out infinite alternate;
-  animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate; */
 }
 @-webkit-keyframes glow {
   from {

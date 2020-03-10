@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom'
 class Viewcart extends React.Component {
   constructor() {
     super()
-    this.handleClick = this.handleClick.bind(this)
+    // this.handleClick = this.handleClick.bind(this)
   }
 
   async componentDidMount() {
