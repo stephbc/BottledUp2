@@ -34,6 +34,7 @@ export class ItemForm extends React.Component {
               name="name"
               type="text"
               value={this.state.name}
+              required
             />
             <br />
             <label htmlFor="item-type">Item type: </label>
@@ -42,6 +43,7 @@ export class ItemForm extends React.Component {
               name="type"
               type="text"
               value={this.state.type}
+              required
             />
             <br />
             <label htmlFor="item-materal">Item material: </label>
@@ -50,6 +52,7 @@ export class ItemForm extends React.Component {
               name="material"
               type="text"
               value={this.state.material}
+              required
             />
             <br />
             <label htmlFor="item-price">Item price: </label>
@@ -58,6 +61,7 @@ export class ItemForm extends React.Component {
               name="price"
               type="text"
               value={this.state.price}
+              required
             />
             <br />
             <label htmlFor="item-color">Item color: </label>
@@ -74,6 +78,7 @@ export class ItemForm extends React.Component {
               name="description"
               type="text"
               value={this.state.description}
+              required
             />
             <br />
             <button type="submit">UPDATE ITEM</button>
