@@ -11,8 +11,8 @@ const REMOVE_USER = 'REMOVE_USER'
  * INITIAL STATE
  */
 const initialState = {
-  user: {},
-  defaultUser: {}
+  user: {}
+  // defaultUser: {}
 }
 
 /**
@@ -27,7 +27,7 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const {data} = await axios.get('/auth/me')
-    dispatch(getUser(data || defaultUser))
+    dispatch(getUser(data))
   } catch (err) {
     console.error(err)
   }
