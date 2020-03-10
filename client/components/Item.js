@@ -42,7 +42,7 @@ class Item extends React.Component {
         {/* /public/products/${directory}/ */}
         <h2>{product.name}</h2>
         <h3>{`$${product.price / 100}`}</h3>
-        <select id="dropdown" value="quantity" onChange={this.handleChange}>
+        <select id="dropdown" onChange={this.handleChange}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
