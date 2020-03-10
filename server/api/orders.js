@@ -130,16 +130,18 @@ router.put('/checkout', async (req, res, next) => {
         }
       })
       const itemsInCart = await cart.getProducts()
-      itemsInCart.forEach(async el => {
-        const throughItem = await ProductOrders.findOne({
-          where: {
-            orderId: cart.id,
-            productId: el.id
-          }
+      await Promise.all(
+        itemsInCart.forEach(async el => {
+          const throughItem = await ProductOrders.findOne({
+            where: {
+              orderId: cart.id,
+              productId: el.id
+            }
+          })
+          throughItem.priceAtPurchase = el.price
+          await throughItem.save()
         })
-        throughItem.priceAtPurchase = el.price
-        await throughItem.save()
-      })
+      )
       const {address} = req.body
       const {billingInfo} = req.body
       cart.address = address
