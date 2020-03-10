@@ -114,11 +114,7 @@ class Checkout extends React.Component {
               <label htmlFor="cvc">CVC</label>
               <input onChange={this.handleChange} name="cvc" type="number" />
             </div>
-            <button type="submit">Submit</button>
-
-            <div className="ordersummary">
-              <h3>3 Order Summary</h3>
-            </div>
+            <button type="pay">Pay</button>
           </div>
         </form>
       </div>
