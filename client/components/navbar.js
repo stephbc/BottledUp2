@@ -19,35 +19,58 @@ export class Navbar extends React.Component {
   render() {
     // console.log("isLoggedIn", this.props.isLoggedIn)
     // console.log("state", this.state)
-    return (
-      <div>
-        <h1>BOTTLED UP</h1>
-        <nav>
-          {this.props.isLoggedIn ? (
+    console.log(this.props)
+    if (
+      this.props.user.accountType === 'Admin' &&
+      this.props.isLoggedIn === true
+    ) {
+      return (
+        <div>
+          <h1>BOTTLED UP</h1>
+          <nav>
             <div>
-              {/* The navbar will show these links after you log in */}
               <Link to="/home">Home</Link>
               <Link to="/products">All Products</Link>
-              <Link to="/signup">Sign Up</Link>
+              <Link to="/signup">My Account</Link>
               <Link to="/viewcart">View Cart</Link>
               <Link to="/adminview">Admin View</Link>
               <a href="#" onClick={this.props.handleClick}>
                 Logout
               </a>
             </div>
-          ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to="/products">All Products</Link>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/viewcart">View Cart</Link>
-              <Link to="/login">Login</Link>
-            </div>
-          )}
-        </nav>
-        <hr />
-      </div>
-    )
+          </nav>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h1>BOTTLED UP</h1>
+          <nav>
+            {this.props.isLoggedIn ? (
+              <div>
+                {/* The navbar will show these links after you log in */}
+                <Link to="/home">Home</Link>
+                <Link to="/products">All Products</Link>
+                <Link to="/signup">My Account</Link>
+                <Link to="/viewcart">View Cart</Link>
+                <a href="#" onClick={this.props.handleClick}>
+                  Logout
+                </a>
+              </div>
+            ) : (
+              <div>
+                {/* The navbar will show these links before you log in */}
+                <Link to="/products">All Products</Link>
+                <Link to="/signup">Sign Up</Link>
+                <Link to="/viewcart">View Cart</Link>
+                <Link to="/login">Login</Link>
+              </div>
+            )}
+          </nav>
+          <hr />
+        </div>
+      )
+    }
   }
 }
 
@@ -56,7 +79,8 @@ export class Navbar extends React.Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
