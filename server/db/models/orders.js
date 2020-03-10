@@ -21,11 +21,11 @@ const Orders = db.define('orders', {
     }
   },
   address: {
-    type: Sequelize.ARRAY,
-    defaultValue: ['5 Hanover Square', 'New York', 'New York', 10016, 'USA']
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: ['5 Hanover Square', 'New York', 'New York', '10016', 'USA']
   },
   billingInfo: {
-    type: Sequelize.ARRAY,
+    type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: ['cardnumber', 'expMonth', 'expYear', 'cvc']
   }
 })
