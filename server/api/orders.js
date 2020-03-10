@@ -40,8 +40,7 @@ router.get('/cart/:userId', async (req, res, next) => {
         }
       })
       const cartProducts = await ownCart.getProducts()
-      if (!cartProducts.length) res.send('Cart is empty')
-      else res.json(cartProducts)
+      res.json(cartProducts)
     }
   } catch (err) {
     next(err)
@@ -102,7 +101,7 @@ router.put('/checkout', async (req, res, next) => {
           userId: req.user.id
         }
       })
-      const itemsInCart = cart.getProducts()
+      const itemsInCart = await cart.getProducts()
       itemsInCart.forEach(async el => {
         const throughItem = await ProductOrders.findOne({
           where: {
@@ -121,6 +120,7 @@ router.put('/checkout', async (req, res, next) => {
       })
       const newCart = await Orders.create()
       await user.addOrder(newCart)
+      res.json(cart, itemsInCart)
     }
   } catch (err) {
     next(err)
