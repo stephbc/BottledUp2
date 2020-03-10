@@ -30,8 +30,7 @@ class Checkout extends React.Component {
       this.state.expYear,
       this.state.cvc
     ]
-
-    // this.props.checkoutThunk(this.props.cart.id, address, billingInfo)
+    this.props.checkoutThunk(this.props.cart.id, address, billingInfo)
   }
 
   render() {
@@ -104,8 +103,7 @@ class Checkout extends React.Component {
                   '2027',
                   '2028',
                   '2029',
-                  '2020',
-                  '2021'
+                  '2030'
                 ].map(year => <option key={year}>{year}</option>)}
               </select>
             </div>
