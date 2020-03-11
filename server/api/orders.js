@@ -129,9 +129,7 @@ router.put('/checkout', async (req, res, next) => {
           userId: req.user.id
         }
       })
-      console.log(cart)
       const itemsInCart = await cart.getProducts()
-      console.log(itemsInCart)
       await Promise.all(
         itemsInCart.map(async el => {
           const throughItem = await ProductOrders.findOne({
@@ -142,11 +140,10 @@ router.put('/checkout', async (req, res, next) => {
           })
           throughItem.priceAtPurchase = el.price
           await throughItem.save()
-          console.log(throughItem)
         })
       )
-      const {address} = req.body
-      const {billingInfo} = req.body
+      const address = req.body.address
+      const billingInfo = req.body.billingInfo
       cart.address = address
       cart.billingInfo = billingInfo
       await cart.save()
@@ -158,7 +155,6 @@ router.put('/checkout', async (req, res, next) => {
       })
       const newCart = await Orders.create()
       await user.addOrder(newCart)
-      console.log('empty cart', newCart)
       res.json(newCart)
     }
   } catch (err) {

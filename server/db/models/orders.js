@@ -30,8 +30,9 @@ const Orders = db.define('orders', {
   }
 })
 
-Orders.prototype.completion = function() {
+Orders.prototype.completion = async function() {
   this.complete = true
+  await this.save()
 }
 Orders.prototype.allItems = async function() {
   let cart = await ProductOrders.findAll({
