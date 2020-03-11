@@ -8,19 +8,10 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 class Viewcart extends React.Component {
-  constructor() {
-    super()
-    // this.handleClick = this.handleClick.bind(this)
-  }
-
   async componentDidMount() {
     const {data} = await axios.get('/auth/me')
     this.props.getCartThunk(data.id)
   }
-
-  // handleClick() {
-  //   this.props.checkoutThunk(this.props.cart.id)
-  // }
 
   render() {
     const cart = this.props.cart

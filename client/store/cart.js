@@ -51,12 +51,11 @@ export const updateQuantity = (productId, qty) => {
   }
 }
 
-export const checkout = (cartId, address, billingInfo) => {
+export const checkout = obj => {
   return {
     type: CHECKOUT,
-    cartId,
-    address,
-    billingInfo
+    address: obj.address,
+    billingInfo: obj.billingInfo
   }
 }
 
@@ -119,11 +118,12 @@ export const updateQuantityThunk = (productId, qty) => {
     }
   }
 }
-export const checkoutThunk = (cartId, address, billingInfo) => {
+export const checkoutThunk = (address, billingInfo) => {
   return async dispatch => {
     try {
+      console.log('in axios request...')
       await axios.put('/api/orders/checkout', {address, billingInfo})
-      dispatch(checkout(cartId, address, billingInfo))
+      dispatch(checkout({address, billingInfo}))
     } catch (error) {
       console.error(error)
     }
@@ -152,7 +152,7 @@ export default function cartReducer(state = initialState, action) {
         })
       }
     case CHECKOUT:
-      return 'Thank you for shopping at BottledUp!'
+      return state
     default:
       return state
   }
