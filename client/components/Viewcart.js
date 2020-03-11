@@ -17,15 +17,16 @@ class Viewcart extends React.Component {
     const cart = this.props.cart
     const user = this.props.user
     const totalCost = cart.totalCost / 100
+    const quantity = cart.quantity
     if (!user.id) return <div>Please Log in to see your cart</div>
-    if (!cart.items.length)
+    if (!cart.items || !cart.items.length)
       return <div>Cart Is Empty - Go Pop Some Bottles!</div>
     else
       return (
         <div>
           <div className="cart">
             <div>Your Cart</div>
-            <h2>There are {cart.quantity} items in your cart</h2>
+            <h2>There are {quantity} items in your cart</h2>
             <h3>Total Price: $ {totalCost}</h3>
             <ul>
               {cart.items.map(product => {
