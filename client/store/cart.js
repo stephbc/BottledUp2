@@ -28,12 +28,12 @@ export const addToCart = product => {
   }
 }
 
-// export const removeFromCart = restOfCart => {
-//   return {
-//     type: REMOVE_FROM_CART,
-//     restOfCart
-//   }
-// }
+export const removeFromCart = restOfCart => {
+  return {
+    type: REMOVE_FROM_CART,
+    restOfCart
+  }
+}
 
 // export const updateCart = (productId, productUpdates) => {
 //   return {
@@ -51,11 +51,9 @@ export const updateQuantity = (productId, qty) => {
   }
 }
 
-export const checkout = obj => {
+export const checkout = () => {
   return {
-    type: CHECKOUT,
-    address: obj.address,
-    billingInfo: obj.billingInfo
+    type: CHECKOUT
   }
 }
 
@@ -90,7 +88,7 @@ export const removeFromCartThunk = productId => {
   return async dispatch => {
     try {
       const {data} = await axios.delete(`/api/orders/${productId}`)
-      dispatch(getCart(data))
+      dispatch(removeFromCart(data))
     } catch (error) {
       console.error(error)
     }
@@ -123,7 +121,7 @@ export const checkoutThunk = (address, billingInfo) => {
     try {
       console.log('in axios request...')
       await axios.put('/api/orders/checkout', {address, billingInfo})
-      dispatch(checkout({address, billingInfo}))
+      dispatch(checkout())
     } catch (error) {
       console.error(error)
     }
@@ -151,8 +149,10 @@ export default function cartReducer(state = initialState, action) {
           }
         })
       }
+    case REMOVE_FROM_CART:
+      return {...state, items: action.restOfCart}
     case CHECKOUT:
-      return state
+      return initialState
     default:
       return state
   }
