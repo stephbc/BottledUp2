@@ -119,7 +119,7 @@ export const updateQuantityThunk = (productId, qty) => {
 export const checkoutThunk = (address, billingInfo) => {
   return async dispatch => {
     try {
-      console.log('in axios request...')
+      console.log('in axios request...', address)
       await axios.put('/api/orders/checkout', {address, billingInfo})
       dispatch(checkout())
     } catch (error) {

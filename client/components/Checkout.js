@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import checkoutThunk from '../store/cart'
+import {checkoutThunk} from '../store/cart'
 
 class Checkout extends React.Component {
   constructor() {
@@ -12,16 +12,17 @@ class Checkout extends React.Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: [event.target.value]
+      [event.target.name]: event.target.value
     })
   }
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault()
     let address = [
       this.state.street,
       this.state.city,
       this.state.state,
-      this.state.zipcod,
+      this.state.zipcode,
       this.state.country
     ]
     let billingInfo = [
@@ -31,6 +32,7 @@ class Checkout extends React.Component {
       this.state.cvc
     ]
     this.props.checkoutThunk(address, billingInfo)
+    this.setState({})
   }
 
   render() {

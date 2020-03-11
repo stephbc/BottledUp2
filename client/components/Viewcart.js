@@ -38,7 +38,7 @@ class Viewcart extends React.Component {
                     >
                       Remove from Cart
                     </button>
-                    <p>Quantity: {product.productOrders.quantity || 1}</p>
+                    {/* <p>Quantity: {product.productOrders.quantity}</p> */}
                     <SingleProduct product={product} />
                   </div>
                 )
