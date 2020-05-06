@@ -40,9 +40,9 @@ export class AddProduct extends React.Component {
 
   render() {
     return (
-      <div className="additem">
+      <div>
         <h4>ADD NEW ITEM: </h4>
-        <form className="addform" onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="item-name">Item name: </label>
             <input

@@ -54,7 +54,6 @@ nav a {
   padding: 1em;
   margin: 1em;
   justify-content: space-evenly;
-  /* align-content: flex-start; */
 }
 
 .product {
@@ -87,41 +86,25 @@ nav a {
   padding: 1em;
 }
 
-/*
-
 label {
   display: block;
-  flex-wrap: wrap;
-
 }
 
 form {
   margin: 1em;
   display: table-row-group;
 }
+
 input {
-  margin-bottom: 10px;
+  margin-bottom: 1em;
 }
 
 .checkout {
   text-align: center;
 }
 
-.additem {
-  display: flex;
-  flex-direction: column;
-  border: solid;
-  border-color: black;
-  background-color: silver;
-}
-.addform {
-  display: flex;
-  flex-direction: row;
-}
-th {
+/* th {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
- */
+} */
