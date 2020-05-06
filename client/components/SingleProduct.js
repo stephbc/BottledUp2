@@ -5,9 +5,9 @@ const SingleProduct = props => {
   const {product} = props
   return (
     <div className="product">
-      <Link to={`/products/${product.id}`}>
-        <img id="productPic" src={`${product.imgUrl}`} height="200" />
-        <h4>{product.name}</h4>
+      <Link to={`/products/${product.id}`} className="productLink">
+        <img src={`${product.imgUrl}`} height="200" />
+        <p>{product.name}</p>
         <p>{`$${product.price / 100}`}</p>
       </Link>
       <br />
